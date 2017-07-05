@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>组件通信</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<son @connect="say"></son><!--v-on的缩写用@符号-->
+		</div>
+		
+		<script>
+			Vue.component('son',{
+				template:`<button @click="send">
+							Click
+						  </button>`,
+				data(){
+					return{
+						msg:' I am data of son'
+					}
+				},
+				methods:{
+					send(){
+						this.$emit('connect',this.msg);//触发事件的API
+					}
+				}
+			});
+			
+			const app=new Vue({
+				el:"#app",
+				methods:{
+					say(msg){
+						console.log(msg);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

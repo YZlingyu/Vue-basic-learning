@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title></title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			{{num+3}}
+			{{ok?'yes':'no'}}
+			<a :href="'http://'+host">baidu</a>
+		</div>
+		<script>
+			let app=new Vue({
+				el:"#app",
+				data:{
+					num:2,
+					ok:true,
+					host:"baidu.com"
+				}
+			});
+		</script>
+	</body>
+</html>

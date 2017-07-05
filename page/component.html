@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>component</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<my-article v-for="item in articles" :detail="item"></my-article>
+			<!--将detail理解为形参，article为实参-->
+		</div>
+		<script>
+			Vue.component('my-article',{
+				props:['detail'],
+				template:`<div>
+							<div>
+								<h1>{{detail.title}}</h1>
+								<div>
+									<span>{{detail.date}}</span>
+									<span v-show="detail.is_original">create</span>
+								</div>
+							</div>
+							<img :src="detail.cover" alt="img"/>
+						</div>`
+						
+			});
+			let vm = new Vue({
+				el:"#app",
+				data:{
+					articles:[{
+						title:"First class",
+						date:"2017.3.6",
+						is_original:true,
+						cover:"cover.jpg"
+					},
+					{
+						title:"Second class",
+						date:"2017.3.6",
+						is_original:true,
+						cover:"cover.jpg"
+					},
+					{
+						title:"Third class",
+						date:"2017.3.6",
+						is_original:true,
+						cover:"cover.jpg"
+					}
+					]
+				}
+			});
+		</script>
+	</body>
+</html>

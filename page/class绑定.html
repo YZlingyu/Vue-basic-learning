@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>class绑定</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<style>
+		.static{
+			width:100px;
+			height:100px;
+		}
+		.class-a{
+			background-color: red;
+		}
+		.class-b{
+			background-color: green;
+		}
+	</style>
+	<body>
+		<!--对象语法-->
+		<!--method1-->
+		<!--<div class="static" v-bind:class="{'class-a':isA,'class-b':isB}"></div>-->
+		<!--method2-->
+		<!--<div class="static" v-bind:class="classObject"></div>-->
+		<!--数组语法-->
+		<div v-bind:class="[classA,classB]"></div>
+		<script>
+			new Vue({
+				el:".static",
+				//method1
+				/*data:{
+					isB:true,
+					isA:false
+				}*/
+				
+				//method2
+				/*data:{
+					classObject:{
+						'class-a':true,
+						'class-b':false
+					}*/
+					
+				//数组语法
+				data:{
+					classA:'class-a',
+					classB:'class-b'
+				}
+			})
+		</script>
+	</body>
+</html>

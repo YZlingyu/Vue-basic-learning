@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>计算器</title>
+		<script src="../js/vue.js"></script>
+		<!-----安装vuex------>
+		<script src="../js/vuex.js"></script>
+	</head>
+	
+	<body>
+		<div id="app">
+			<div class="result">{{result}}</div>
+			<div class="enter">{{enter === ""?0:enter}}</div>
+			<div class="keys">
+				<div class="list">
+					<!--键盘区-->
+					<keyboard v-for="item in keys" :value="item">
+						
+					</keyboard>
+				</div>
+			</div>
+		</div>
+	</body>
+	
+	<script>
+		//创建仓库store
+		const store = new Vuex.Store({
+			state:{
+				result: "",//运算结果
+				enter: "" //输入的值
+			},
+		//刚开始将result和enter看作是应用级的状态，定义仓库store的state对象属性来管理它们，初始化为空字符串。
+		
+		//定义名为calculation的mutation
+		mutations:{
+			calculate(state, value){
+				if(value === '='){
+					//按键值为=，进行计算结果
+					state.result = eval(state.enter);
+					state.enter += value;
+				}
+				else if(value === 'clear'){
+					//按键的值为clear，清空数据
+					state.result = state.enter = "";
+				}else{
+					//输出结果enter进行拼接
+					state.enter += value;
+				}
+			}
+		}
+	})	
+		//自定义keyboar组件
+		Vue.component('keyboard',{
+			//接受的参数value，代表键盘的值
+			props:['value'],
+			//点击时间的监听处理getKeyboardValue
+			template:`<div :data-value="value" @click="getKeyboardValue" class="key">{{value}}</div>`,
+			methods:{
+				//点击事件处理函数
+				getKeyboardValue(event){
+					//获取当前的按键的值
+					let value = event.target.dataset.value;
+					//通过commit提交mutation
+					this.$store.commit('calculate',value)
+				}
+			}
+		});
+		//添加动态属性data-value
+		
+		//创建Vue实例
+		const app = new Vue({
+			//挂载元素
+			el:"#app",
+			"store": store,
+			data:{
+				//16个按键的值
+				keys:[
+					'clear', '+', '-', '*',
+		            '7', '8', '9', '/',
+		            '4', '5', '6', '0',
+		            '1', '2', '3', '=',
+				]
+			},
+			
+			/*---增加计算属性----*/
+			computed: {
+				result(){
+					//通过this.$store获取仓库的数据result
+					return this.$store.state.result;
+				},
+				enter(){
+					//通过this.$store获取仓库的数据result
+					return this.$store.state.enter;
+				}
+			}
+		});
+	</script>
+	<style>
+		#app{
+			width: 170px;
+		}
+		.result, .enter{
+			width: 100%;
+			padding-right: 10px;
+			padding-bottom: 10px;
+			box-sizing: border-box;
+			background-color: #CCCCCC;
+			text-align: right;
+		}
+		.result{
+			font-size: 21px;
+			padding-top: 20px;
+		}
+		.list{
+			width: 170px;
+		}
+		.key{
+			width: 40px;
+			height: 40px;
+			border: 1px solid #CCCCCC;
+			display: inline-block;
+		}
+		.key:first-child{
+			color: orange;
+		}
+		.key:last-child{
+			background-color: orange;
+			color: #FFFFFF;
+		}
+	</style>
+</html>
+

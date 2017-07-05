@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>指令</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p v-text="msg"></p>
+			<p>{{msg}}</p>
+			<p v-html="htmlmsg"></p>
+			<p v-show="show1">true</p>
+			<p v-show="show2">false</p>
+			<p v-if="if1">if:true</p>
+			<p v-if="if2">if:false</p>
+			<p v-else>else</p>
+			<div v-for="item in list">{{item}}</div>
+			<div v-for="(item,index) in list">{{index}}.{{item}}</div>
+			<button v-on:click="say('Tom')">click</button>
+			<input v-model="inputmsg" type="text" />
+			<p>you input:{{inputmsg}}</p>
+			<input v-once="oncemsg" type="text" />
+			<p>you input:{{oncemsg}}</p>
+		</div>
+		<script>
+			let app = new Vue({
+				el:"#app",
+				data:{
+					msg:'hello world',
+					htmlmsg:'<b>hello world',
+					show1:true,
+					show2:false,
+					if1:true,
+					if2:false,
+					inputmsg:'',
+					oncemsg:'hoho',
+					list:['Tom','John','Lisa']
+				},
+				methods:{
+					say(name){
+						console.log('hello'+name);
+					}
+				}
+			});
+		</script>
+	</body>
+</html>

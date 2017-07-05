@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>绑定value</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<input type="checkbox" v-model="toggle" v-bind:true-value="a" v-bind:false-value="b">
+		<label for="checkbox">{{checked}}</label>
+		<script>
+			Vue vm = new Vue({
+				
+				data:{
+					checked:[]
+				}
+			});
+			// 当选中时
+vm.toggle === vm.a
+// 当没有选中时
+vm.toggle === vm.b
+		</script>
+	</body>
+</html>

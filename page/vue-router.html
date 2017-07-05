@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>vue-router</title>
+		<script src="../js/vue.js"></script>
+		<script src="../js/vue-router.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<div class="nav">
+				<!----to指定链接---->
+				<router-link to="/vue">
+					vue
+				</router-link>
+				<router-link to="/react">
+					react
+				</router-link>
+				<router-link to="/angular">
+					angular
+				</router-link>
+			</div>
+			<div class="content">
+				<router-view></router-view>
+			</div>
+		</div>
+	</body>
+	<script>
+		const vueComponent = {
+			template:`<div> this is vue </div>`
+		};
+		
+		const reactComponent = {
+			template:`<div> this is react </div>`
+		};
+		
+		const angularComponent = {
+			template:`<div> this is angular </div>`
+		};
+		
+		//关联导航地址和组件
+		const router = new VueRouter({
+			routes:[
+			   {
+			   	path:"/vue",
+			   	component: vueComponent
+			   },
+			   {
+			   	path:"/react",
+			   	component: reactComponent
+			   },
+			   {
+			   	path:"/angular",
+			   	component: angularComponent
+			   }
+			]
+		});
+		
+		//创建vue实例，注入路由router
+		const app = new Vue({
+			el: "#app",
+			router
+		})
+	</script>
+</html>

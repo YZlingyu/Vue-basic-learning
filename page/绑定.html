@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>style绑定</title>
+		<script src="../js/vue.js"></script>
+	</head>
+	<body>
+		<div id="app">
+			<p :class="{'active':isActive}">This is binding class</p>
+			<p :class="[activeClass,errorClass]">This is array style</p>
+			<p :style="{color:colorStyle}">This is style</p>
+		</div>
+		<script>
+			new Vue({
+				el:"#app",
+				data:{
+					//isActive:true
+					activeClass:'avitve',
+					errorClass:'error',
+					colorStyle:'red'
+					}
+					
+			})
+		</script>
+	</body>
+</html>
+
