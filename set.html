@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>set</title>
+    <script src="https://unpkg.com/vue"></script>
+</head>
+
+<body>
+    <h1>vue.set</h1>
+    <hr>
+    <div id="app">
+        <li v-for="aa in arr">{{aa}}</li>
+    </div>
+    <p><button onclick="add()"> add</button></p>
+
+    <script>
+        function add() {
+            //vue.set
+            //Vue.set(outData,'count',2);
+            //app的属性
+            //app.count++;
+            //outData对象
+            //outData.count++;
+            //console.log("我已经执行了");
+            //app.arr[1] = 'ddd'; 
+            Vue.set(app.arr, 1, 'ddd');
+        }
+        var outData = {
+            count: 1,
+            goods: 'car',
+            arr: ['aaa', 'bbb', 'ccc']
+        }
+        var app = new Vue({
+            el: "#app",
+            data: outData
+        })
+    </script>
+</body>
+
+</html>
